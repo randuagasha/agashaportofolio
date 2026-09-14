@@ -17,7 +17,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Randu — Software Engineering Student",
+  title: "Agasha Portofolio",
   description:
     "Portfolio of Keola Randu Agasha — Software Engineering Student, UI/UX Designer, and Developer.",
 };
