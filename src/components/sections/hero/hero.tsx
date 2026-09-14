@@ -1,141 +1,144 @@
 "use client";
 
-import { motion } from "motion/react";
-import { ArrowDownRight } from "lucide-react";
-
+import { motion, useScroll, useTransform } from "motion/react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { useRef } from "react";
+import { HeroBackground } from "./heroBackground";
 import { HeroGrid } from "./heroGrid";
 import { HeroOrb } from "./heroOrb";
+import { HeroRacingLine } from "./heroRacingLine";
 import { HeroTelemetry } from "./heroTelemetry";
 
-const titleWords = ["Software", "Engineering", "Student"];
-
 export function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -140]);
+  const contentOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.55, 0.9],
+    [1, 1, 0],
+  );
+
+  const backgroundScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+
+  const racingOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.45, 0.8],
+    [1, 0.6, 0],
+  );
+
   return (
     <section
+      ref={heroRef}
       id="hero"
       className="relative flex min-h-[100svh] items-center overflow-hidden"
     >
+      <motion.div
+        style={{
+          scale: backgroundScale,
+          y: backgroundY,
+        }}
+        className="absolute inset-0"
+      >
+        <HeroBackground />
+      </motion.div>
+
+      <motion.div
+        style={{ opacity: racingOpacity }}
+        className="absolute inset-0"
+      >
+        <HeroRacingLine />
+      </motion.div>
+
       <HeroGrid />
       <HeroOrb />
       <HeroTelemetry />
 
-      <div className="container relative z-20">
-        <div className="flex flex-col justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.8,
-              delay: 0.5,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="mb-8 flex items-center gap-3"
-          >
-            <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-[var(--accent)]">
-              Portfolio / 2026
-            </span>
-
-            <span className="h-px w-10 bg-[var(--accent)]/40" />
-
-            <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/25">
-              01 / 05
-            </span>
-          </motion.div>
-
-          <h1 className="display-text relative uppercase">
-            {titleWords.map((word, index) => (
-              <span
-                key={word}
-                className="block overflow-hidden"
-              >
-                <motion.span
-                  initial={{
-                    y: "110%",
-                    opacity: 0,
-                  }}
-                  animate={{
-                    y: 0,
-                    opacity: 1,
-                  }}
-                  transition={{
-                    duration: 1,
-                    delay: 0.65 + index * 0.12,
-                    ease: [0.76, 0, 0.24, 1],
-                  }}
-                  className={`block text-[clamp(3.5rem,10vw,10rem)] leading-[0.82] ${
-                    index === 1 ? "text-white" : "text-white/90"
-                  }`}
-                >
-                  {word}
-                </motion.span>
-              </span>
-            ))}
-          </h1>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.8,
-              delay: 1.2,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between"
-          >
-            <p className="max-w-md text-sm leading-7 text-white/40 md:text-base">
-              UI/UX designer and developer focused on creating bold digital
-              experiences through design, code, and interaction.
-            </p>
-
-            <a
-              href="#about"
-              className="group flex w-fit items-center gap-4"
-            >
-              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/50 transition-colors duration-300 group-hover:text-white">
-                Explore portfolio
-              </span>
-
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 transition-all duration-500 group-hover:border-[var(--accent)] group-hover:bg-[var(--accent)]">
-                <ArrowDownRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
-              </span>
-            </a>
-          </motion.div>
-        </div>
-      </div>
-
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{
-          duration: 1,
-          delay: 1.8,
+        style={{
+          y: contentY,
+          opacity: contentOpacity,
         }}
-        className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2"
+        className="container relative z-10 py-32"
       >
-        <div className="flex flex-col items-center gap-3">
-          <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-white/25">
-            Scroll
-          </span>
+        <div className="mb-8 flex items-center gap-3">
+          <span className="h-px w-8 bg-[var(--accent)]" />
 
-          <motion.div
-            animate={{
-              scaleY: [0, 1, 0],
-              transformOrigin: ["top", "top", "bottom"],
-            }}
+          <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/40">
+            Portfolio / 2026
+          </span>
+        </div>
+
+        <div className="max-w-[1100px]">
+          <motion.h1
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{
-              duration: 1.8,
-              repeat: Infinity,
-              ease: "easeInOut",
+              delay: 0.25,
+              duration: 1,
+              ease: "easeOut",
             }}
-            className="h-12 w-px bg-gradient-to-b from-[var(--accent)] to-transparent"
-          />
+            className="display-text text-[clamp(3.5rem,9.5vw,10rem)] font-medium leading-[0.8] tracking-[-0.07em] text-white"
+          >
+            Software
+            <br />
+            <span className="ml-[8vw] text-white/35">Engineering</span>
+            <br />
+            <span>
+              Student<span className="text-[var(--accent)]">.</span>
+            </span>
+          </motion.h1>
+        </div>
+
+        <div className="mt-12 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.65,
+              duration: 0.8,
+            }}
+            className="max-w-md text-sm leading-7 text-white/40"
+          >
+            UI/UX designer and developer focused on creating bold digital
+            experiences through design, code, and interaction.
+          </motion.p>
+
+          <motion.a
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.8,
+              duration: 0.8,
+            }}
+            href="#about"
+            className="group inline-flex w-fit items-center gap-3 border border-white/10 px-5 py-4 font-mono text-[10px] uppercase tracking-[0.18em] text-white transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          >
+            Explore portfolio
+            <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
+          </motion.a>
         </div>
       </motion.div>
 
-      <div className="absolute bottom-8 right-8 z-20 hidden md:block">
-        <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/20">
-          Scroll to explore ↓
-        </span>
+      <div className="absolute bottom-8 left-0 right-0 z-10">
+        <div className="container flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <ArrowDown className="h-3.5 w-3.5 animate-bounce text-white/30" />
+
+            <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/25">
+              Scroll to explore
+            </span>
+          </div>
+
+          <span className="font-mono text-[9px] text-white/20">01 / 06</span>
+        </div>
       </div>
     </section>
   );

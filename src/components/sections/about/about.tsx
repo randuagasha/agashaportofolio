@@ -1,139 +1,108 @@
 "use client";
 
-import { motion } from "motion/react";
+import Image from "next/image";
+import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
-
+import { useRef } from "react";
 import { AboutImage } from "./aboutImage";
 import { AboutStats } from "./aboutStats";
 
 export function About() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const headingY = useTransform(scrollYProgress, [0, 1], [50, -40]);
+
   return (
     <section
+      ref={sectionRef}
       id="about"
-      className="relative overflow-hidden border-t border-white/10 py-24 md:py-36"
+      className="relative overflow-hidden border-t border-white/[0.06] bg-[#080808] py-24 md:py-32 lg:py-40"
     >
-      <div className="container">
-        <div className="mb-16 flex items-end justify-between md:mb-24">
-          <div>
-            <motion.div
-              initial={{ opacity: 0, x: -15 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="flex items-center gap-3"
-            >
-              <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-[var(--accent)]">
-                02 / About
-              </span>
+      <div className="technical-grid-subtle absolute inset-0 opacity-30" />
 
-              <span className="h-px w-10 bg-[var(--accent)]/40" />
-            </motion.div>
+      <div className="container relative">
+        <div className="mb-16 flex items-center justify-between border-b border-white/[0.08] pb-5">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-8 bg-[var(--accent)]" />
 
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.8,
-                delay: 0.1,
-              }}
-              className="display-text mt-5 text-[clamp(3rem,7vw,7rem)] uppercase leading-[0.85]"
-            >
-              Driver
-              <br />
-              Profile
-            </motion.h2>
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/40">
+              Driver Profile
+            </span>
           </div>
 
-          <span className="hidden font-mono text-[9px] uppercase tracking-[0.2em] text-white/20 md:block">
-            Identity / 001
+          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/20">
+            02 / 06
           </span>
         </div>
 
-        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-          <AboutImage />
+        <div className="grid gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-24">
+          <motion.div style={{ y: imageY }} className="relative">
+            <AboutImage />
+          </motion.div>
 
-          <div className="flex flex-col justify-between">
-            <div>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.15,
-                }}
-                className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--accent)]"
-              >
-                Software Engineering Student
-              </motion.p>
+          <div>
+            <motion.div style={{ y: headingY }}>
+              <span className="mb-5 block font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--accent)]">
+                Software / Design / Engineering
+              </span>
 
-              <motion.h3
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.8,
-                  delay: 0.2,
-                }}
-                className="display-text mt-5 max-w-3xl text-[clamp(2rem,4vw,4rem)] uppercase leading-[0.95]"
-              >
-                Designing interfaces.
+              <h2 className="display-text max-w-3xl text-[clamp(3rem,7vw,7rem)] font-medium leading-[0.84] tracking-[-0.065em] text-white">
+                Building
                 <br />
-                Building experiences.
-              </motion.h3>
+                <span className="text-white/30">digital</span>
+                <br />
+                machines.
+              </h2>
+            </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.8,
-                  delay: 0.35,
-                }}
-                className="mt-8 max-w-2xl space-y-5 text-sm leading-7 text-white/40 md:text-base"
-              >
-                <p>
-                  I&apos;m Keola Randu Agasha, a Software Engineering student
-                  focused on UI/UX design and frontend development.
-                </p>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8 }}
+              className="mt-12 max-w-xl space-y-6 text-sm leading-7 text-white/40"
+            >
+              <p>
+                Im Randu, a Software Engineering student focused on UI/UX
+                design and frontend development. I enjoy turning ideas into
+                interfaces that feel intentional, responsive, and alive.
+              </p>
 
-                <p>
-                  I enjoy turning ideas into interfaces that feel intentional,
-                  interactive, and visually distinctive. My current focus is
-                  building modern web experiences with React, Next.js, and
-                  TypeScript while continuously improving my design and
-                  engineering skills.
-                </p>
-              </motion.div>
-            </div>
+              <p>
+                My approach combines visual design with engineering. I care
+                about the details users notice and the technical decisions they
+                dont.
+              </p>
 
-            <div className="mt-12">
-              <AboutStats />
+              <p>
+                Currently exploring deeper frontend architecture, backend
+                development, and interaction design while building projects that
+                challenge my limits.
+              </p>
+            </motion.div>
 
-              <motion.a
-                href="#projects"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.4,
-                }}
-                className="group mt-8 flex w-fit items-center gap-3"
-              >
-                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/50 transition-colors duration-300 group-hover:text-white">
-                  View selected work
-                </span>
-
-                <ArrowUpRight className="h-4 w-4 text-[var(--accent)] transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
-              </motion.a>
-            </div>
+            <motion.a
+              href="#projects"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="group mt-10 inline-flex items-center gap-3 border border-white/10 px-5 py-4 font-mono text-[10px] uppercase tracking-[0.18em] text-white transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            >
+              View selected work
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
+            </motion.a>
           </div>
         </div>
-      </div>
 
-      <div className="pointer-events-none absolute -right-40 top-1/2 hidden h-[500px] w-[500px] -translate-y-1/2 rounded-full border border-white/[0.025] md:block" />
+        <AboutStats />
+      </div>
     </section>
   );
 }

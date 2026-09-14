@@ -1,102 +1,102 @@
 export interface Achievement {
   id: number;
-  image: string;
   title: string;
   issuer: string;
-  date: string;
+  year: string;
   category: string;
+  image: string;
   description: string;
 }
 
 export const achievements: Achievement[] = [
   {
     id: 1,
-    image: "/images/certificates/certificate-01.png",
-    title: "Certificate Achievement 01",
-    issuer: "Issuer Name",
-    date: "2026",
+    title: "Certificate of Achievement",
+    issuer: "Competition / Organization",
+    year: "2026",
     category: "Achievement",
+    image: "/images/certificates/certificate-01.png",
     description:
-      "Recognition for completing an achievement, program, or learning milestone.",
+      "Recognition for successfully completing and contributing to a software engineering project.",
   },
   {
     id: 2,
-    image: "/images/certificates/certificate-02.png",
-    title: "Certificate Achievement 02",
-    issuer: "Issuer Name",
-    date: "2026",
+    title: "Certificate of Achievement",
+    issuer: "Competition / Organization",
+    year: "2026",
     category: "Achievement",
+    image: "/images/certificates/certificate-02.png",
     description:
-      "Recognition for completing an achievement, program, or learning milestone.",
+      "Recognition for participation and achievement in a technology-related program.",
   },
   {
     id: 3,
-    image: "/images/certificates/certificate-03.jpg",
-    title: "Certificate Achievement 03",
-    issuer: "Issuer Name",
-    date: "2026",
+    title: "Certificate of Achievement",
+    issuer: "Competition / Organization",
+    year: "2025",
     category: "Achievement",
+    image: "/images/certificates/certificate-03.jpg",
     description:
-      "Recognition for completing an achievement, program, or learning milestone.",
+      "Recognition for successfully completing a technology and software development activity.",
   },
   {
     id: 4,
-    image: "/images/certificates/certificate-04.jpg",
-    title: "Certificate Achievement 04",
-    issuer: "Issuer Name",
-    date: "2026",
+    title: "Certificate of Achievement",
+    issuer: "Competition / Organization",
+    year: "2025",
     category: "Achievement",
+    image: "/images/certificates/certificate-04.jpg",
     description:
-      "Recognition for completing an achievement, program, or learning milestone.",
+      "Recognition for participation in a digital product and development program.",
   },
   {
     id: 5,
-    image: "/images/certificates/certificate-05.png",
-    title: "Certificate Achievement 05",
-    issuer: "Issuer Name",
-    date: "2026",
+    title: "Certificate of Achievement",
+    issuer: "Competition / Organization",
+    year: "2025",
     category: "Achievement",
+    image: "/images/certificates/certificate-05.png",
     description:
-      "Recognition for completing an achievement, program, or learning milestone.",
+      "Recognition for completing a software engineering related activity.",
   },
   {
     id: 6,
-    image: "/images/certificates/certificate-06.jpg",
-    title: "Certificate Achievement 06",
-    issuer: "Issuer Name",
-    date: "2026",
+    title: "Certificate of Achievement",
+    issuer: "Competition / Organization",
+    year: "2025",
     category: "Achievement",
+    image: "/images/certificates/certificate-06.jpg",
     description:
-      "Recognition for completing an achievement, program, or learning milestone.",
+      "Recognition for achievement in a technology-focused program.",
   },
   {
     id: 7,
-    image: "/images/certificates/certificate-07.jpg",
-    title: "Certificate Achievement 07",
-    issuer: "Issuer Name",
-    date: "2026",
+    title: "Certificate of Achievement",
+    issuer: "Competition / Organization",
+    year: "2025",
     category: "Achievement",
+    image: "/images/certificates/certificate-07.jpg",
     description:
-      "Recognition for completing an achievement, program, or learning milestone.",
+      "Recognition for participation and contribution in a digital project.",
   },
   {
     id: 8,
-    image: "/images/certificates/certificate-08.jpg",
-    title: "Certificate Achievement 08",
-    issuer: "Issuer Name",
-    date: "2026",
+    title: "Certificate of Achievement",
+    issuer: "Competition / Organization",
+    year: "2025",
     category: "Achievement",
+    image: "/images/certificates/certificate-08.jpg",
     description:
-      "Recognition for completing an achievement, program, or learning milestone.",
+      "Recognition for completing a technology and creative development program.",
   },
   {
     id: 9,
-    image: "/images/certificates/certificate-09.jpg",
-    title: "Certificate Achievement 09",
-    issuer: "Issuer Name",
-    date: "2026",
+    title: "Certificate of Achievement",
+    issuer: "Competition / Organization",
+    year: "2025",
     category: "Achievement",
+    image: "/images/certificates/certificate-09.jpg",
     description:
-      "Recognition for completing an achievement, program, or learning milestone.",
+      "Recognition for successfully completing a software engineering activity.",
   },
 ];

@@ -6,6 +6,8 @@ import { Achievements } from "@/components/sections/achievements/achievements";
 import { Projects } from "@/components/sections/projects/projects";
 import { Skills } from "@/components/sections/skills/skills";
 import { Contact } from "@/components/sections/contact/contact";
+import { Footer } from "@/components/layout/footer";
+
 
 export default function Home() {
   return (
@@ -18,10 +20,9 @@ export default function Home() {
         <About />
         <Achievements />
         <Projects />
-
         <Skills />
-
         <Contact />
+        <Footer />
       </main>
     </>
   );

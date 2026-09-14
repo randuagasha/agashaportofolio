@@ -199,3 +199,28 @@ section {
     transition-duration: 0.01ms !important;
   }
 }
+
+.technical-grid-subtle {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+@media (max-width: 767px) {
+  .technical-grid-subtle {
+    background-size: 50px 50px;
+  }
+}
+
+@media (max-width: 767px) {
+  #contact .technical-grid-subtle {
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #contact .animate-pulse {
+    animation: none;
+  }
+}

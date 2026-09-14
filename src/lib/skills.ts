@@ -32,13 +32,13 @@ export const skills: Skill[] = [
   },
   {
     name: "TypeScript",
-    level: 96,
+    level: 97,
     category: "Frontend",
     status: "Primary",
   },
   {
     name: "Figma / UI/UX",
-    level: 95,
+    level: 90,
     category: "Design",
     status: "Primary",
   },
@@ -50,13 +50,13 @@ export const skills: Skill[] = [
   },
   {
     name: "SQL / MySQL",
-    level: 55,
+    level: 65,
     category: "Backend",
     status: "Learning",
   },
   {
     name: "Flutter",
-    level: 40,
+    level: 35,
     category: "Mobile",
     status: "Exploring",
   },
@@ -65,11 +65,5 @@ export const skills: Skill[] = [
     level: 35,
     category: "Backend",
     status: "Exploring",
-  },
-  {
-    name: "Express.js",
-    level: 60,
-    category: "Backend",
-    status: "Learning",
   },
 ];

@@ -1,145 +1,189 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { motion } from "motion/react";
-import { ArrowUpRight } from "lucide-react";
+import { Activity, Gauge, Zap } from "lucide-react";
 import { skills } from "@/lib/skills";
 import { SkillBar } from "./skillBar";
 import { SkillTelemetry } from "./skillTelemetry";
 
+const categories = [
+  "All",
+  "Frontend",
+  "Design",
+  "Backend",
+  "Mobile",
+] as const;
+
+type Category = (typeof categories)[number];
+
 export function Skills() {
+  const [activeCategory, setActiveCategory] =
+    useState<Category>("All");
+
+  const filteredSkills = useMemo(() => {
+    if (activeCategory === "All") {
+      return skills;
+    }
+
+    return skills.filter(
+      (skill) => skill.category === activeCategory,
+    );
+  }, [activeCategory]);
+
+  const average =
+    Math.round(
+      skills.reduce((sum, skill) => sum + skill.level, 0) /
+        skills.length,
+    );
+
   return (
     <section
       id="skills"
-      className="relative overflow-hidden border-t border-white/10 py-24 md:py-32"
+      className="relative overflow-hidden border-t border-white/[0.06] bg-[#050505] py-24 md:py-32 lg:py-40"
     >
-      <div className="technical-grid absolute inset-0 opacity-30" />
+      <div className="technical-grid-subtle absolute inset-0 opacity-15" />
 
       <div className="container relative">
-        <div className="mb-16 flex flex-col justify-between gap-8 md:flex-row md:items-end">
+        <div className="mb-16 flex items-center justify-between border-b border-white/[0.08] pb-5">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-8 bg-[var(--accent)]" />
+
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/40">
+              System Telemetry
+            </span>
+          </div>
+
+          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/20">
+            05 / 06
+          </span>
+        </div>
+
+        <div className="grid gap-16 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
           <div>
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="mb-5 flex items-center gap-3"
-            >
-              <span className="font-mono text-xs text-[var(--accent)]">
-                05 / Technical Telemetry
-              </span>
-
-              <span className="h-px w-10 bg-[var(--accent)]" />
-            </motion.div>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="display-text max-w-3xl text-5xl font-medium leading-[0.95] tracking-[-0.05em] text-white md:text-7xl"
+              transition={{ duration: 0.7 }}
             >
-              Built for
-              <br />
-              <span className="text-white/30">performance.</span>
-            </motion.h2>
-          </div>
+              <div className="mb-6 flex items-center gap-3">
+                <Gauge className="h-4 w-4 text-[var(--accent)]" />
 
-          <div className="max-w-xs font-mono text-[10px] uppercase leading-relaxed tracking-wider text-white/30">
-            Technical profile / Current season
-            <br />
-            Monitoring active disciplines,
-            <br />
-            development stack & capabilities.
-          </div>
-        </div>
-
-        <SkillTelemetry />
-
-        <div className="mt-16 grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-          <div>
-            <div className="mb-8 flex items-center justify-between border-b border-white/10 pb-4">
-              <div>
-                <span className="font-mono text-[10px] text-white/30">
-                  ENGINE DIAGNOSTICS
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/25">
+                  Driver Performance
                 </span>
-
-                <h3 className="mt-2 text-lg font-medium text-white">
-                  Skill Load
-                </h3>
               </div>
 
-              <span className="font-mono text-[9px] text-[var(--accent)]">
-                LIVE
-              </span>
-            </div>
+              <h2 className="display-text text-[clamp(3rem,7vw,7rem)] font-medium leading-[0.82] tracking-[-0.07em] text-white">
+                Skills
+                <br />
+                <span className="text-white/30">under</span>
+                <br />
+                load.
+              </h2>
 
-            <div className="space-y-1">
-              {skills.map((skill, index) => (
-                <SkillBar key={skill.name} skill={skill} index={index} />
-              ))}
+              <p className="mt-10 max-w-md text-sm leading-7 text-white/35">
+                A snapshot of the technologies, tools, and disciplines
+                currently powering my work. Some are race-ready.
+                Others are still being pushed to their limits.
+              </p>
+            </motion.div>
+
+            <div className="mt-12 grid grid-cols-2 gap-px border border-white/[0.07] bg-white/[0.07]">
+              <div className="bg-[#050505] p-5">
+                <div className="mb-4 flex items-center gap-2">
+                  <Activity className="h-3.5 w-3.5 text-[var(--accent)]" />
+
+                  <span className="font-mono text-[7px] uppercase tracking-[0.15em] text-white/20">
+                    System
+                  </span>
+                </div>
+
+                <div className="display-text text-3xl text-white">
+                  {average}%
+                </div>
+
+                <div className="mt-2 font-mono text-[7px] uppercase tracking-[0.15em] text-white/20">
+                  Average Level
+                </div>
+              </div>
+
+              <div className="bg-[#050505] p-5">
+                <div className="mb-4 flex items-center gap-2">
+                  <Zap className="h-3.5 w-3.5 text-[var(--accent)]" />
+
+                  <span className="font-mono text-[7px] uppercase tracking-[0.15em] text-white/20">
+                    Stack
+                  </span>
+                </div>
+
+                <div className="display-text text-3xl text-white">
+                  {skills.length}
+                </div>
+
+                <div className="mt-2 font-mono text-[7px] uppercase tracking-[0.15em] text-white/20">
+                  Active Skills
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="relative flex min-h-[420px] items-center justify-center overflow-hidden border border-white/10 bg-[#080808]">
-            <div className="absolute inset-0 technical-grid-subtle opacity-40" />
-
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 30,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              className="absolute h-72 w-72 rounded-full border border-dashed border-white/10"
-            />
-
-            <motion.div
-              animate={{ rotate: -360 }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              className="absolute h-52 w-52 rounded-full border border-dashed border-[var(--accent)]/30"
-            />
-
-            <div className="relative text-center">
-              <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/30">
-                System Performance
-              </span>
-
-              <div className="my-4 font-mono text-7xl font-medium tracking-[-0.08em] text-white">
-                85
-                <span className="text-2xl text-white/30">%</span>
-              </div>
-
-              <span className="inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-widest text-[var(--accent)]">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--accent)]" />
-                System Active
-              </span>
-            </div>
-
-            <div className="absolute left-5 top-5 font-mono text-[9px] text-white/20">
-              CORE / 01
-            </div>
-
-            <div className="absolute bottom-5 right-5 font-mono text-[9px] text-white/20">
-              LOAD / 085
-            </div>
+          <div>
+            <SkillTelemetry />
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col justify-between gap-6 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-white/25">
-            Constantly learning / constantly improving
+        <div className="mt-20">
+          <div className="mb-8 flex flex-col gap-5 border-b border-white/[0.08] pb-5 sm:flex-row sm:items-center sm:justify-between">
+            <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/25">
+              Technical Stack
+            </span>
+
+            <div className="no-scrollbar flex max-w-full gap-2 overflow-x-auto pb-1">
+              {categories.map((category) => {
+                const active = category === activeCategory;
+
+                return (
+                  <button
+                    key={category}
+                    type="button"
+                    onClick={() => setActiveCategory(category)}
+                    className={`shrink-0 border px-3 py-2 font-mono text-[8px] uppercase tracking-[0.15em] transition-colors ${
+                      active
+                        ? "border-[var(--accent)] bg-[var(--accent)] text-black"
+                        : "border-white/[0.08] text-white/30 hover:border-white/20 hover:text-white/60"
+                    }`}
+                  >
+                    {category}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <motion.div
+            layout
+            className="grid gap-x-12 lg:grid-cols-2"
+          >
+            {filteredSkills.map((skill, index) => (
+              <SkillBar
+                key={skill.name}
+                skill={skill}
+                index={index}
+              />
+            ))}
+          </motion.div>
+        </div>
+
+        <div className="mt-12 flex flex-col gap-3 border-t border-white/[0.08] pt-5 sm:flex-row sm:items-center sm:justify-between">
+          <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/20">
+            System status / operational
           </span>
 
-          <a
-            href="#contact"
-            className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-white transition-colors hover:text-[var(--accent)]"
-          >
-            Start a project
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-          </a>
+          <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-[var(--accent)]">
+            Continuous learning enabled
+          </span>
         </div>
       </div>
     </section>

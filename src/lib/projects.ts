@@ -1,89 +1,80 @@
 export interface Project {
   id: number;
   title: string;
-  shortTitle: string;
+  category: string;
+  type: string;
+  year: string;
   description: string;
   image: string;
-  type: string;
-  role: string;
-  year: string;
-  stack: string[];
-  demoUrl?: string;
-  githubUrl?: string;
-  figmaUrl?: string;
+  technologies: string[];
+  demo?: string;
+  github?: string;
+  design?: string;
 }
 
 export const projects: Project[] = [
   {
     id: 1,
-    title: "Revion Management System",
-    shortTitle: "REVION",
-    description:
-      "A web-based management system designed for automotive workshops, covering workshop operations, bookings, services, and customer management.",
-    image: "/images/projects/revion.png",
-    type: "Personal",
-    role: "Fullstack Development",
+    title: "Fixlane",
+    category: "Personal",
+    type: "Fullstack",
     year: "2026",
-    stack: ["Next.js", "Express.js", "MySQL"],
-    demoUrl: "https://revion.co.id/",
-    githubUrl: "https://github.com/randuagasha/Revion-FE-Project-SAS",
+    description:
+      "A multi-vendor automotive workshop platform designed to connect customers with workshops through service booking, vehicle management, workshop discovery, and maintenance features.",
+    image: "/images/projects/revion.png",
+    technologies: ["Next.js", "TypeScript", "Express", "MySQL"],
+    demo: "https://revion.co.id",
+    github: "https://github.com/randuagasha",
   },
   {
     id: 2,
     title: "Food Rescue",
-    shortTitle: "FOOD RESCUE",
-    description:
-      "A digital marketplace designed to reduce food waste by connecting food providers, local businesses, and consumers.",
-    image: "/images/projects/foodrescue.png",
-    type: "Competition",
-    role: "Frontend Development",
+    category: "Competition",
+    type: "Frontend",
     year: "2025",
-    stack: ["Next.js", "React", "TypeScript"],
-    demoUrl: "https://foodrescue.web.id/",
-    githubUrl: "https://github.com/RezaAdityaRamadhan26/food-rescue-fe",
+    description:
+      "A digital platform concept focused on reducing food waste through a simple and accessible user experience.",
+    image: "/images/projects/foodrescue.png",
+    technologies: ["Next.js", "React", "TypeScript"],
+    demo: "#",
+    github: "#",
   },
   {
     id: 3,
-    title: "Cashbhak Cashier",
-    shortTitle: "CASHBHAK",
-    description:
-      "A cashier management platform focused on product inventory, financial records, and transaction management.",
-    image: "/images/projects/cashbhak.png",
-    type: "Competition",
-    role: "Frontend Development",
+    title: "Cashbhak",
+    category: "Competition",
+    type: "Frontend",
     year: "2025",
-    stack: ["React", "JavaScript", "CSS"],
-    demoUrl: "https://cashbhak.vercel.app/",
-    githubUrl: "https://github.com/RezaAdityaRamadhan26/CashBhak",
+    description:
+      "A cashier interface designed to simplify transaction management and provide a clean operational workflow.",
+    image: "/images/projects/cashbhak.png",
+    technologies: ["React", "JavaScript", "CSS"],
+    demo: "#",
+    github: "#",
   },
   {
     id: 4,
-    title: "Starmate Learning App",
-    shortTitle: "STARMATE",
-    description:
-      "A mobile learning application concept focused on creating a simple and accessible learning experience through UI/UX design.",
-    image: "/images/projects/starmate.png",
-    type: "Competition",
-    role: "UI/UX Designer",
+    title: "Starmate",
+    category: "Competition",
+    type: "UI/UX",
     year: "2025",
-    stack: ["Figma", "UI/UX", "Prototyping"],
-    demoUrl:
-      "https://www.figma.com/proto/ju3XV3O5yJfbFMJpkJEnRN/STARMATE-LEARNING?page-id=0%3A1&node-id=695-2310&starting-point-node-id=695%3A2310",
-    figmaUrl:
-      "https://www.figma.com/design/ju3XV3O5yJfbFMJpkJEnRN/STARMATE-LEARNING?node-id=0-1",
+    description:
+      "A learning application concept designed around accessible navigation, structured learning content, and interactive user flows.",
+    image: "/images/projects/STARMATE2.PNG",
+    technologies: ["Figma", "UI/UX", "Prototyping"],
+    design: "#",
   },
   {
     id: 5,
     title: "Library Management System",
-    shortTitle: "LIBRARY",
-    description:
-      "A library management website created for a school project, featuring digital library operations and database integration.",
-    image: "/images/projects/notranlibrary.png",
-    type: "Personal",
-    role: "Fullstack Development",
+    category: "Personal",
+    type: "Fullstack",
     year: "2025",
-    stack: ["Next.js", "MySQL", "TypeScript"],
-    demoUrl: "https://librarywebaas.vercel.app/",
-    githubUrl: "https://github.com/randuagasha/library-web-aas",
+    description:
+      "A web-based library management system for handling books, users, and borrowing workflows.",
+    image: "/images/projects/notranlibrary.png",
+    technologies: ["Next.js", "TypeScript", "MySQL"],
+    demo: "#",
+    github: "#",
   },
 ];
